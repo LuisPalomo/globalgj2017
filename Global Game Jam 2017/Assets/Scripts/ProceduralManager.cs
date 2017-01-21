@@ -10,7 +10,10 @@ public class ProceduralManager : MonoBehaviour {
 
     public int nLevels=3;
 
-
+    [SerializeField]
+    private GameObject startPlace;
+    [SerializeField]
+    private GameObject endPlace;
     [SerializeField]
     private List <GameObject> lRoom;
 
@@ -34,6 +37,8 @@ public class ProceduralManager : MonoBehaviour {
 
         int i = 0;
 
+        bool checkLastRoom = false;
+
         string tempNameRoom="Nop";
 
         Vector3 rendTotal = Vector3.zero;
@@ -44,10 +49,21 @@ public class ProceduralManager : MonoBehaviour {
 
         GameObject tempRoomPreview = null;
 
-        while ( i<nLevel)
+        while (!checkLastRoom)
         {
-            tempRoomCurrent = lRoom.RandomItem();
-
+            if (tempNameRoom.Equals("Nop"))
+            {
+                tempRoomCurrent = startPlace;
+            }else if (i==nLevel)
+            {
+                tempRoomCurrent = endPlace;
+                checkLastRoom = true;
+            }
+            else
+            {
+                tempRoomCurrent = lRoom.RandomItem();
+            }
+           
             if (!tempRoomCurrent.GetComponent<ProceduralRoom>().name.Equals(tempNameRoom))
             {
                 tempNameRoom = tempRoomCurrent.GetComponent<ProceduralRoom>().name;
@@ -73,9 +89,21 @@ public class ProceduralManager : MonoBehaviour {
 
                 tempRoomPreview = tempRoomCurrent;
 
-                i++;
+
+                if (!tempNameRoom.Equals("first"))
+                {
+                    i++;
+                }
             }
            
         }
      }
+
+    public void createRoom(GameObject roomCurrent,GameObject roomPreview)
+    {
+
+
+
+
+    }
 }
