@@ -5,23 +5,24 @@ using UnityEngine;
 
 public class ProceduralManager : MonoBehaviour {
 
-    List <GameObject> lRoom;
+    [SerializeField]
+    private float offSetZ;
 
-    public GameObject lrt;
+    public int nLevels=3;
 
-    private float offSetP;
+
+    [SerializeField]
+    private List <GameObject> lRoom;
+
+    
+
+    
 
 	// Use this for initialization
 	void Start () {
-       Renderer rend = GetComponent<Renderer>();
-       Vector3 v3Rend=Vector3.forward*rend.bounds.size.z;
-        
-       Vector3 tMid = (rend.bounds.max+rend.bounds.min)*0.5f;
-        
-        tMid = tMid + v3Rend;
-      
-        Instantiate(lrt,tMid,Quaternion.identity);
-        //Vector3  = rend.bounds.SqrDistance(tMid*v3Rend);
+
+        generationLevel(nLevels);
+
     }
 	
 	// Update is called once per frame
@@ -33,18 +34,48 @@ public class ProceduralManager : MonoBehaviour {
 
         int i = 0;
 
+        string tempNameRoom="Nop";
 
+        Vector3 rendTotal = Vector3.zero;
+
+        Vector3 posPreview = Vector3.zero;
+
+        GameObject tempRoomCurrent = null;
+
+        GameObject tempRoomPreview = null;
 
         while ( i<nLevel)
         {
-            GameObject tempRoom = lRoom.RandomItem();
+            tempRoomCurrent = lRoom.RandomItem();
 
-            //if(tempRoom.GetComponent<ProceduralRoom>().name)
+            if (!tempRoomCurrent.GetComponent<ProceduralRoom>().name.Equals(tempNameRoom))
+            {
+                tempNameRoom = tempRoomCurrent.GetComponent<ProceduralRoom>().name;
+
+                Renderer tempRendFloor = tempRoomCurrent.transform.FindChild("floor").GetComponent<Renderer>();
+
+                Vector3 rendBoundZ = Vector3.forward * (tempRendFloor.bounds.size.z);
+
+                Vector3 rendMid = rendBoundZ*0.5f;
+
+                rendTotal += rendMid +(Vector3.forward*offSetZ);
+
+                if (tempRoomPreview!=null)
+                {
+                    Renderer tempRendFpreview = tempRoomPreview.transform.FindChild("floor").GetComponent<Renderer>();
+
+                    Vector3 rendBoundZP = Vector3.forward * (tempRendFpreview.bounds.size.z);
+
+                    rendTotal += rendBoundZP * 0.5f;
+                }
+
+                Instantiate(tempRoomCurrent, rendTotal, Quaternion.identity);
+
+                tempRoomPreview = tempRoomCurrent;
+
+                i++;
+            }
            
         }
-
-       
-
-
-        }
+     }
 }
