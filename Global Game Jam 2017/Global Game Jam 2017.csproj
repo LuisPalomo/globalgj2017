@@ -89,6 +89,7 @@
     <Compile Include="Assets\Game Jam Template\Scripts\SetAudioLevels.cs" />
     <Compile Include="Assets\Game Jam Template\Scripts\ShowPanels.cs" />
     <Compile Include="Assets\Game Jam Template\Scripts\StartOptions.cs" />
+    <Compile Include="Assets\GameOver.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />

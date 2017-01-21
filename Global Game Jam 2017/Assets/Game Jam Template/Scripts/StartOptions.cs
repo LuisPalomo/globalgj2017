@@ -128,4 +128,16 @@ public class StartOptions : MonoBehaviour {
 		//Play music clip assigned to mainMusic in PlayMusic script
 		playMusic.PlaySelectedMusic (1);
 	}
+
+    public void GoToMainMenu()
+    {
+        //Set time.timescale to 1, this will cause animations and physics to continue updating at regular speed
+        Time.timeScale = 1;
+
+        //Hide the main menu UI element
+        showPanels.HideGameOverPanel();
+
+        //Load the selected scene, by scene index number in build settings
+        SceneManager.LoadScene(0);
+    }
 }
