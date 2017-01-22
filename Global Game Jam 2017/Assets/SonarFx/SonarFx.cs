@@ -69,6 +69,8 @@ public class SonarFx : MonoBehaviour
     // Reference to the shader.
     [SerializeField] Shader shader;
 
+    GameObject player;
+
     // Private shader variables
     int baseColorID;
     int waveColorID;
@@ -83,6 +85,7 @@ public class SonarFx : MonoBehaviour
         waveParamsID = Shader.PropertyToID("_SonarWaveParams");
         waveVectorID = Shader.PropertyToID("_SonarWaveVector");
         addColorID = Shader.PropertyToID("_SonarAddColor");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void OnEnable()
@@ -115,5 +118,6 @@ public class SonarFx : MonoBehaviour
             Shader.EnableKeyword("SONAR_SPHERICAL");
             Shader.SetGlobalVector(waveVectorID, _origin);
         }
+        origin = player.transform.position;
     }
 }

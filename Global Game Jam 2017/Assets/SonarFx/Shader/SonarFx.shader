@@ -36,7 +36,7 @@ Shader "Hidden/SonarFX"
 
         CGPROGRAM
 
-        #pragma surface surf Lambert alpha
+        #pragma surface surf Lambert
         #pragma multi_compile SONAR_DIRECTIONAL SONAR_SPHERICAL
 
         struct Input
@@ -73,8 +73,7 @@ Shader "Hidden/SonarFX"
             w *= _SonarWaveParams.x;
 
             // Apply to the surface.
-            o.Albedo = _SonarBaseColor.rgb;
-			o.Alpha = _SonarWaveColor * w + _SonarAddColor;
+            o.Albedo = _SonarBaseColor;
             o.Emission = _SonarWaveColor * w + _SonarAddColor;
         }
 
