@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114267933410388798}
   m_Layer: 0
   m_Name: enemyP
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,8 +112,9 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 4294966783
-  agent: {fileID: 0}
-  lPatrolPlaces: []
-  viewPoint: {fileID: 0}
+  patrolPlace1: {fileID: 0}
+  patrolPlace2: {fileID: 0}
   visibleTargets:
   - {fileID: 0}
+  sawPlayer: 0
+  patrol: 0

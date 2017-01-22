@@ -12,14 +12,16 @@ public class EnemyAI : MonoBehaviour {
     public LayerMask targetMask;
     public LayerMask obstacleMask;
 
-    [SerializeField]
+   
     private NavMeshAgent agent;
 
     [SerializeField]
-    private List<Transform> lPatrolPlaces;
+    private Transform patrolPlace1;
 
     [SerializeField]
-    private Transform viewPoint;
+    private Transform patrolPlace2;
+
+    private Transform playerTrans;
     
     [SerializeField]
     private enum statesAI
@@ -34,18 +36,48 @@ public class EnemyAI : MonoBehaviour {
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
 
+    [HideInInspector]
+    public bool sawPlayer=false;
+
+    [HideInInspector]
+    public bool patrol=false;
     // Use this for initialization
     void Start () {
+
+        agent = this.GetComponent<NavMeshAgent>();
+
         StartCoroutine("FindTargetsWithDelay", .2f);
     }
 	
+
+
+
     IEnumerator FindTargetsWithDelay(float delay)
     {
         while (true)
         {
             yield return new WaitForSeconds(delay);
             FindVisibleTargets();
+            if (sawPlayer)
+            {
+                FollowPlayer();
+            }
+
+            if (patrol && !sawPlayer)
+            {
+                agent.SetDestination(patrolPlace1.position);
+
+            }else if(!patrol && !sawPlayer)
+            {
+                agent.SetDestination(patrolPlace2.position);
+            }
         }
+    }
+
+
+    void FollowPlayer()
+    {
+        agent.SetDestination(playerTrans.position);
     }
 
     void FindVisibleTargets()
@@ -56,6 +88,7 @@ public class EnemyAI : MonoBehaviour {
         for (int i = 0; i < targetsInViewRadius.Length; i++)
         {
             Transform target = targetsInViewRadius[i].transform;
+            playerTrans = targetsInViewRadius[i].transform;
             Vector3 dirToTarget = (target.position - transform.position).normalized;
             if (Vector3.Angle(transform.forward, dirToTarget) < viewAngle / 2)
             {
@@ -63,7 +96,7 @@ public class EnemyAI : MonoBehaviour {
 
                 if (!Physics.Raycast(transform.position, dirToTarget, dstToTarget, obstacleMask))
                 {
-                    
+                    this.sawPlayer = true;
                     visibleTargets.Add(target);
                 }
             }
