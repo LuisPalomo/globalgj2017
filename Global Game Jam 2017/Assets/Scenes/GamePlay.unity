@@ -238,7 +238,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  switchSpeed: 5
+  switchSpeed: 6
 --- !u!114 &40306792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +254,7 @@ MonoBehaviour:
   _direction: {x: 0, y: 0, z: 1}
   _origin: {x: 0, y: 0, z: 0}
   _baseColor: {r: 0.2, g: 0.2, b: 0.2, a: 0}
-  _waveColor: {r: 1, g: 0.2, b: 0.2, a: 0}
+  _waveColor: {r: 0.23137257, g: 0.09019608, b: 0.9607844, a: 0}
   _waveAmplitude: 2
   _waveExponent: 22
   _waveInterval: 20
