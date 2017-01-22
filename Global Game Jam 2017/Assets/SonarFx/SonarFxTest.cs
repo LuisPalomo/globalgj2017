@@ -6,7 +6,13 @@ public class SonarFxTest : MonoBehaviour
     public int sonarCharges;
     public GUIStyle style;
     bool sonarActive = false;
+    GameObject enemy;
 
+
+    private void Awake()
+    {
+        enemy = GameObject.FindGameObjectWithTag("Enemy");
+    }
 
     void Update()
     {
@@ -29,6 +35,7 @@ public class SonarFxTest : MonoBehaviour
     void toggleSonar()
     {
         sonarActive = !sonarActive;
+        enemy.GetComponent<MeshRenderer>().enabled = sonarActive; 
         GetComponent<SonarFxSwitcher>().Toggle();
     }
 }

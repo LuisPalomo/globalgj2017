@@ -528,7 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneToStart: 1
   changeScenes: 1
-  changeMusicOnStart: 0
+  changeMusicOnStart: 1
   inMainMenu: 1
   animColorFade: {fileID: 67531431}
   animMenuAlpha: {fileID: 1488824768}
